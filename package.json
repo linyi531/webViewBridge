@@ -10,6 +10,15 @@
   },
   "author": "hezhiqiang",
   "license": "MIT",
+  "standard": {
+    "ignore": [
+      "dist/",
+      "src/native_inject/",
+      "test/"
+    ],
+    "globals": ["WebViewJavascriptBridge"],
+    "parser": "babel-eslint"
+  },
   "devDependencies": {
     "babel-core": "^6.25.0",
     "babel-eslint": "^7.2.3",
@@ -21,15 +30,6 @@
     "mocha": "^3.4.2",
     "standard": "^10.0.2",
     "webpack": "^3.0.0"
-  },
-  "standard": {
-    "ignore": [
-      "dist/",
-      "src/native_tmp/",
-      "test/"
-    ],
-    "globals": ["WebViewJavascriptBridge"],
-    "parser": "babel-eslint"
   },
   "dependencies": {
     "lodash": "^4.17.4"

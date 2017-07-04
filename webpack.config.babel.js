@@ -15,7 +15,7 @@ export default {
         path.resolve(__dirname, 'src')
       ],
       exclude: [
-        path.resolve(__dirname, 'src/native_tmp'),
+        path.resolve(__dirname, 'src/native_inject'),
         path.resolve(__dirname, 'node_modules')
       ],
       loader: 'babel-loader'
