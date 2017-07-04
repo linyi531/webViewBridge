@@ -4,7 +4,7 @@ import validation from '../src/utils/validation'
 const Q = () => true
 
 describe('validation', () => {
-  describe('string type', () => {
+  describe('#string type', () => {
     it('string type validation be ok', () => {
       assert.doesNotThrow(() => validation([1, 2], 'array'))
       assert.doesNotThrow(() => validation('test', 'string'))
@@ -13,7 +13,7 @@ describe('validation', () => {
     })
   })
 
-  describe('array type', () => {
+  describe('#array type', () => {
     it('array type validation be ok', () => {
       assert.doesNotThrow(() => validation([1, 2], ['string', 'array']))
       assert.doesNotThrow(() => validation('test', ['string', 'array']))

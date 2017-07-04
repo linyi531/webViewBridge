@@ -58,29 +58,31 @@ export default class YCEvent {
   }
 
   /**
-   * 删掉同类订阅，然后订阅该回调
+   * 订阅一个一次性事件
    *
    * @param {any} eventName
    * @param {any} callback
    * @memberof YCEvent
    */
-  one (eventName, callback) {
+  once (eventName, callback) {
     if (getType(eventName) !== 'string') return
     if (getType(callback) !== 'function') return
-    this.on(eventName, after(
+    let self = this
+    let newCallback = after(
       callback,
-      () => this.off(eventName, callback)
-    ))
+      () => self.off(eventName, newCallback)
+    )
+    this.on(eventName, newCallback)
   }
 
   /**
-   * 订阅一个一次性事件
+   * 删掉同类订阅，然后订阅该回调
    *
    * @param {string} eventName 事件名称
    * @param {function} callback 事件回调
    * @memberof YCEvent
    */
-  once (eventName, callback) {
+  one (eventName, callback) {
     if (getType(eventName) !== 'string') return
     if (getType(callback) !== 'function') return
     this.off(eventName)

@@ -28,7 +28,7 @@
       "src/native_tmp/",
       "test/"
     ],
-    "globals": [],
+    "globals": ["WebViewJavascriptBridge"],
     "parser": "babel-eslint"
   },
   "dependencies": {
