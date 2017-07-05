@@ -1,1 +1,853 @@
-!function(e){function n(r){if(t[r])return t[r].exports;var o=t[r]={i:r,l:!1,exports:{}};return e[r].call(o.exports,o,o.exports,n),o.l=!0,o.exports}var t={};n.m=e,n.c=t,n.d=function(e,t,r){n.o(e,t)||Object.defineProperty(e,t,{configurable:!1,enumerable:!0,get:r})},n.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return n.d(t,"a",t),t},n.o=function(e,n){return Object.prototype.hasOwnProperty.call(e,n)},n.p="",n(n.s=1)}([function(e,n,t){"use strict";Object.defineProperty(n,"__esModule",{value:!0});var r=n.after=function(e,n){return function(){for(var t=arguments.length,r=Array(t),o=0;o<t;o++)r[o]=arguments[o];var u=e.apply(void 0,r);return n.apply(void 0,r),u}};n.before=function(e,n){return function(){for(var t=arguments.length,r=Array(t),o=0;o<t;o++)r[o]=arguments[o];return n.apply(void 0,r),e.apply(void 0,r)}},n.currying=function(e){var n=[];return function t(){for(var o=this,u=arguments.length,i=Array(u),a=0;a<u;a++)i[a]=arguments[a];return 0===i.length?r(function(){return e.apply(o,n)},function(){return n.splice(0,n.length)})():([].push.apply(n,i),t)}},n.compose=function(){for(var e=arguments.length,n=Array(e),t=0;t<e;t++)n[t]=arguments[t];return 0===n.length?function(e){return e}:1===n.length?n[0]:n.reduce(function(e,n){return function(){return e(n.apply(void 0,arguments))}})}},function(e,n,t){"use strict";function r(e){return e&&e.__esModule?e:{default:e}}function o(e,n){if(!(e instanceof n))throw new TypeError("Cannot call a class as a function")}Object.defineProperty(n,"__esModule",{value:!0});var u=function(){function e(e,n){for(var t=0;t<n.length;t++){var r=n[t];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(n,t,r){return t&&e(n.prototype,t),r&&e(n,r),n}}(),i=t(2),a=r(i),c=t(14),f=r(c),l=t(0),s=function(){function e(n){o(this,e),this.events=new a.default(n)}return u(e,[{key:"on",value:function(e,n){var t=this;(0,l.compose)(f.default.ready,function(r){t.events.on(e,n),r.registerHandler(e,function(n){t.events.emit(e,n)})})}},{key:"one",value:function(e,n){this.events.off(e),this.on(e,n)}},{key:"once",value:function(e,n){var t=this;(0,l.compose)(f.default.ready,function(r){t.events.once(e,n),r.registerHandler(e,function(n){t.events.emit(e,n)})})}},{key:"off",value:function(e,n){this.events.off(e,n)}},{key:"callNative",value:function(e,n,t){(0,l.compose)(f.default.ready,function(r){r.callHandler(e,n,t)})}}]),e}();n.default=s,window.YCWebViewBridge=s},function(e,n,t){"use strict";function r(e){return e&&e.__esModule?e:{default:e}}function o(e,n){if(!(e instanceof n))throw new TypeError("Cannot call a class as a function")}Object.defineProperty(n,"__esModule",{value:!0});var u=t(3),i=r(u),a=function(){function e(e,n){for(var t=0;t<n.length;t++){var r=n[t];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(n,t,r){return t&&e(n.prototype,t),r&&e(n,r),n}}(),c=t(0),f=t(13),l=r(f),s="_global_",p={},d=function(){function e(n){o(this,e),(0,l.default)(n,["string","undefined"]),this.spaceName=n||s,this.cache=this._getCache()}return a(e,[{key:"_getCache",value:function(){var e=p[this.spaceName];return e||(e=p[this.spaceName]={}),e}},{key:"on",value:function(e,n){"array"!==(0,f.getType)(this.cache[e])&&(this.cache[e]=[]),this.cache[e].push(n)}},{key:"once",value:function(e,n){if("string"===(0,f.getType)(e)&&"function"===(0,f.getType)(n)){var t=this,r=(0,c.after)(n,function(){return t.off(e,r)});this.on(e,r)}}},{key:"one",value:function(e,n){"string"===(0,f.getType)(e)&&"function"===(0,f.getType)(n)&&(this.off(e),this.on(e,n))}},{key:"off",value:function(e,n){"string"===(0,f.getType)(e)&&("function"===(0,f.getType)(n)?(0,i.default)(this.cache[e],function(e){return e===n}):this.cache[e]=null)}},{key:"emit",value:function(e){for(var n=this,t=arguments.length,r=Array(t>1?t-1:0),o=1;o<t;o++)r[o-1]=arguments[o];"string"===(0,f.getType)(e)&&"array"===(0,f.getType)(this.cache[e])&&this.cache[e].forEach(function(e){e.apply(n,r)})}}],[{key:"getCache",value:function(e){return p[e]}}]),e}();n.default=d},function(e,n,t){function r(e,n){var t=[];if(!e||!e.length)return t;var r=-1,i=[],a=e.length;for(n=o(n,3);++r<a;){var c=e[r];n(c,r,e)&&(t.push(c),i.push(r))}return u(e,i),t}var o=t(4),u=t(5);e.exports=r},function(e,n){function t(e){return e}e.exports=t},function(e,n,t){function r(e,n){for(var t=e?n.length:0,r=t-1;t--;){var i=n[t];if(t==r||i!==c){var c=i;u(i)?a.call(e,i,1):o(e,i)}}return e}var o=t(6),u=t(12),i=Array.prototype,a=i.splice;e.exports=r},function(e,n,t){function r(e,n){return n=o(n,e),null==(e=i(e,n))||delete e[a(u(n))]}var o=t(7),u=t(9),i=t(10),a=t(11);e.exports=r},function(e,n,t){function r(){if(!arguments.length)return[];var e=arguments[0];return o(e)?e:[e]}var o=t(8);e.exports=r},function(e,n){var t=Array.isArray;e.exports=t},function(e,n){function t(e){var n=null==e?0:e.length;return n?e[n-1]:void 0}e.exports=t},function(e,n){function t(e){return e}e.exports=t},function(e,n){function t(e){return e}e.exports=t},function(e,n){function t(e,n){return!!(n=null==n?r:n)&&("number"==typeof e||o.test(e))&&e>-1&&e%1==0&&e<n}var r=9007199254740991,o=/^(?:0|[1-9]\d*)$/;e.exports=t},function(e,n,t){"use strict";function r(e){return Object.prototype.toString.call(e).slice(8,-1).toLowerCase()}function o(e,n){var t=r(n);if("string"===t){if(r(e)===n.toLowerCase())return;throw new Error("target type should be a "+t)}if("array"===t){if(n.some(function(n){return r(e)===n}))return;throw new Error("target type should be included in ["+n+"]")}throw new Error("validation parameter types should be string or array")}Object.defineProperty(n,"__esModule",{value:!0}),n.getType=r,n.default=o},function(e,n,t){"use strict";Object.defineProperty(n,"__esModule",{value:!0});var r=n.ready=function(e){if(window.WebViewJavascriptBridge)return e(WebViewJavascriptBridge);if(window.WVJBCallbacks)return window.WVJBCallbacks.push(e);window.WVJBCallbacks=[e];var n=document.createElement("iframe");n.style.display="none",n.src="https://__bridge_loaded__",document.documentElement.appendChild(n),setTimeout(function(){return document.documentElement.removeChild(n)},0)};n.default={ready:r}}]);
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _YCEvent = __webpack_require__(1);
+
+var _YCEvent2 = _interopRequireDefault(_YCEvent);
+
+var _bridge = __webpack_require__(14);
+
+var _bridge2 = _interopRequireDefault(_bridge);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var YCWebViewBridge = function () {
+  function YCWebViewBridge(namespance) {
+    _classCallCheck(this, YCWebViewBridge);
+
+    this.events = new _YCEvent2.default(namespance);
+  }
+
+  _createClass(YCWebViewBridge, [{
+    key: 'on',
+    value: function on(eventName, callback) {
+      var self = this;
+      _bridge2.default.ready(function (bridge) {
+        self.events.on(eventName, callback);
+        // registerHandler 会直接覆盖掉
+        bridge.registerHandler(eventName, function (data) {
+          self.events.emit(eventName, data);
+        });
+      });
+    }
+  }, {
+    key: 'one',
+    value: function one(eventName, callback) {
+      this.events.off(eventName);
+      this.on(eventName, callback);
+    }
+  }, {
+    key: 'once',
+    value: function once(eventName, callback) {
+      var self = this;
+      _bridge2.default.ready(function (bridge) {
+        self.events.once(eventName, callback);
+        bridge.registerHandler(eventName, function (data) {
+          self.events.emit(eventName, data);
+        });
+      });
+    }
+  }, {
+    key: 'off',
+    value: function off(eventName, callback) {
+      this.events.off(eventName, callback);
+    }
+  }, {
+    key: 'callNative',
+    value: function callNative(eventName, data, callback) {
+      _bridge2.default.ready(function (bridge) {
+        bridge.callHandler(eventName, data, callback);
+      });
+    }
+  }]);
+
+  return YCWebViewBridge;
+}();
+
+exports.default = YCWebViewBridge;
+
+
+window.YCWebViewBridge = YCWebViewBridge;
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _remove2 = __webpack_require__(2);
+
+var _remove3 = _interopRequireDefault(_remove2);
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * YCEvent
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * auth: hezhiqiang
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * date: 2017-07-03
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * desc: 支持命名空间的 PUB/SUB Class
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      */
+
+var _fp = __webpack_require__(12);
+
+var _validation = __webpack_require__(13);
+
+var _validation2 = _interopRequireDefault(_validation);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var DEFAULT_SPANCE_NAME = '_global_';
+var _namespanceCache = {};
+
+var YCEvent = function () {
+  /**
+   * 创建一个 YCEvent 对象.
+   * @param {string} spaceName 命名空间名字，默认为 _global_
+   * @memberof YCEvent
+   */
+  function YCEvent(spaceName) {
+    _classCallCheck(this, YCEvent);
+
+    (0, _validation2.default)(spaceName, ['string', 'undefined']);
+    this.spaceName = spaceName || DEFAULT_SPANCE_NAME;
+    this.cache = this._getCache();
+  }
+
+  _createClass(YCEvent, [{
+    key: '_getCache',
+
+
+    /**
+     * 获得该命名空间下的 cache
+     *
+     * @returns cacheObject
+     * @memberof YCEvent
+     */
+    value: function _getCache() {
+      var cache = _namespanceCache[this.spaceName];
+      if (!cache) {
+        cache = _namespanceCache[this.spaceName] = {};
+      }
+
+      return cache;
+    }
+
+    /**
+     * 订阅一个事件
+     *
+     * @param {string} eventName 事件名称
+     * @param {function} callback 事件回调
+     * @memberof YCEvent
+     */
+
+  }, {
+    key: 'on',
+    value: function on(eventName, callback) {
+      if ((0, _validation.getType)(this.cache[eventName]) !== 'array') {
+        this.cache[eventName] = [];
+      }
+      this.cache[eventName].push(callback);
+    }
+
+    /**
+     * 订阅一个一次性事件
+     *
+     * @param {any} eventName
+     * @param {any} callback
+     * @memberof YCEvent
+     */
+
+  }, {
+    key: 'once',
+    value: function once(eventName, callback) {
+      if ((0, _validation.getType)(eventName) !== 'string') return;
+      if ((0, _validation.getType)(callback) !== 'function') return;
+      var self = this;
+      var newCallback = (0, _fp.after)(callback, function () {
+        return self.off(eventName, newCallback);
+      });
+      this.on(eventName, newCallback);
+    }
+
+    /**
+     * 删掉同类订阅，然后订阅该回调
+     *
+     * @param {string} eventName 事件名称
+     * @param {function} callback 事件回调
+     * @memberof YCEvent
+     */
+
+  }, {
+    key: 'one',
+    value: function one(eventName, callback) {
+      if ((0, _validation.getType)(eventName) !== 'string') return;
+      if ((0, _validation.getType)(callback) !== 'function') return;
+      this.off(eventName);
+      this.on(eventName, callback);
+    }
+
+    /**
+     * 取消订阅一个或一类事件
+     *
+     * @param {string} eventName 事件名称
+     * @param {function} callback [可选] 需要取消订阅的回调，如果不提供此参数，则取消此 eventName 下的全部回调
+     * @memberof YCEvent
+     */
+
+  }, {
+    key: 'off',
+    value: function off(eventName, callback) {
+      if ((0, _validation.getType)(eventName) !== 'string') return;
+      if ((0, _validation.getType)(callback) === 'function') {
+        (0, _remove3.default)(this.cache[eventName], function (item) {
+          return item === callback;
+        });
+      } else {
+        this.cache[eventName] = null;
+      }
+    }
+
+    /**
+     * 发布一类事件
+     *
+     * @param {string} eventName 事件名称
+     * @param {function} data 事件携带的数据
+     * @memberof YCEvent
+     */
+
+  }, {
+    key: 'emit',
+    value: function emit(eventName) {
+      var _this = this;
+
+      for (var _len = arguments.length, data = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+        data[_key - 1] = arguments[_key];
+      }
+
+      if ((0, _validation.getType)(eventName) !== 'string') return;
+      if ((0, _validation.getType)(this.cache[eventName]) !== 'array') return;
+
+      this.cache[eventName].forEach(function (item) {
+        item.apply(_this, data);
+      });
+    }
+  }], [{
+    key: 'getCache',
+    value: function getCache(spanceName) {
+      return _namespanceCache[spanceName];
+    }
+  }]);
+
+  return YCEvent;
+}();
+
+exports.default = YCEvent;
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseIteratee = __webpack_require__(3),
+    basePullAt = __webpack_require__(4);
+
+/**
+ * Removes all elements from `array` that `predicate` returns truthy for
+ * and returns an array of the removed elements. The predicate is invoked
+ * with three arguments: (value, index, array).
+ *
+ * **Note:** Unlike `_.filter`, this method mutates `array`. Use `_.pull`
+ * to pull elements from an array by value.
+ *
+ * @static
+ * @memberOf _
+ * @since 2.0.0
+ * @category Array
+ * @param {Array} array The array to modify.
+ * @param {Function} [predicate=_.identity] The function invoked per iteration.
+ * @returns {Array} Returns the new array of removed elements.
+ * @example
+ *
+ * var array = [1, 2, 3, 4];
+ * var evens = _.remove(array, function(n) {
+ *   return n % 2 == 0;
+ * });
+ *
+ * console.log(array);
+ * // => [1, 3]
+ *
+ * console.log(evens);
+ * // => [2, 4]
+ */
+function remove(array, predicate) {
+  var result = [];
+  if (!(array && array.length)) {
+    return result;
+  }
+  var index = -1,
+      indexes = [],
+      length = array.length;
+
+  predicate = baseIteratee(predicate, 3);
+  while (++index < length) {
+    var value = array[index];
+    if (predicate(value, index, array)) {
+      result.push(value);
+      indexes.push(index);
+    }
+  }
+  basePullAt(array, indexes);
+  return result;
+}
+
+module.exports = remove;
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports) {
+
+/**
+ * This method returns the first argument it receives.
+ *
+ * @static
+ * @since 0.1.0
+ * @memberOf _
+ * @category Util
+ * @param {*} value Any value.
+ * @returns {*} Returns `value`.
+ * @example
+ *
+ * var object = { 'a': 1 };
+ *
+ * console.log(_.identity(object) === object);
+ * // => true
+ */
+function identity(value) {
+  return value;
+}
+
+module.exports = identity;
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseUnset = __webpack_require__(5),
+    isIndex = __webpack_require__(11);
+
+/** Used for built-in method references. */
+var arrayProto = Array.prototype;
+
+/** Built-in value references. */
+var splice = arrayProto.splice;
+
+/**
+ * The base implementation of `_.pullAt` without support for individual
+ * indexes or capturing the removed elements.
+ *
+ * @private
+ * @param {Array} array The array to modify.
+ * @param {number[]} indexes The indexes of elements to remove.
+ * @returns {Array} Returns `array`.
+ */
+function basePullAt(array, indexes) {
+  var length = array ? indexes.length : 0,
+      lastIndex = length - 1;
+
+  while (length--) {
+    var index = indexes[length];
+    if (length == lastIndex || index !== previous) {
+      var previous = index;
+      if (isIndex(index)) {
+        splice.call(array, index, 1);
+      } else {
+        baseUnset(array, index);
+      }
+    }
+  }
+  return array;
+}
+
+module.exports = basePullAt;
+
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var castPath = __webpack_require__(6),
+    last = __webpack_require__(8),
+    parent = __webpack_require__(9),
+    toKey = __webpack_require__(10);
+
+/**
+ * The base implementation of `_.unset`.
+ *
+ * @private
+ * @param {Object} object The object to modify.
+ * @param {Array|string} path The property path to unset.
+ * @returns {boolean} Returns `true` if the property is deleted, else `false`.
+ */
+function baseUnset(object, path) {
+  path = castPath(path, object);
+  object = parent(object, path);
+  return object == null || delete object[toKey(last(path))];
+}
+
+module.exports = baseUnset;
+
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var isArray = __webpack_require__(7);
+
+/**
+ * Casts `value` as an array if it's not one.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.4.0
+ * @category Lang
+ * @param {*} value The value to inspect.
+ * @returns {Array} Returns the cast array.
+ * @example
+ *
+ * _.castArray(1);
+ * // => [1]
+ *
+ * _.castArray({ 'a': 1 });
+ * // => [{ 'a': 1 }]
+ *
+ * _.castArray('abc');
+ * // => ['abc']
+ *
+ * _.castArray(null);
+ * // => [null]
+ *
+ * _.castArray(undefined);
+ * // => [undefined]
+ *
+ * _.castArray();
+ * // => []
+ *
+ * var array = [1, 2, 3];
+ * console.log(_.castArray(array) === array);
+ * // => true
+ */
+function castArray() {
+  if (!arguments.length) {
+    return [];
+  }
+  var value = arguments[0];
+  return isArray(value) ? value : [value];
+}
+
+module.exports = castArray;
+
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports) {
+
+/**
+ * Checks if `value` is classified as an `Array` object.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is an array, else `false`.
+ * @example
+ *
+ * _.isArray([1, 2, 3]);
+ * // => true
+ *
+ * _.isArray(document.body.children);
+ * // => false
+ *
+ * _.isArray('abc');
+ * // => false
+ *
+ * _.isArray(_.noop);
+ * // => false
+ */
+var isArray = Array.isArray;
+
+module.exports = isArray;
+
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports) {
+
+/**
+ * Gets the last element of `array`.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Array
+ * @param {Array} array The array to query.
+ * @returns {*} Returns the last element of `array`.
+ * @example
+ *
+ * _.last([1, 2, 3]);
+ * // => 3
+ */
+function last(array) {
+  var length = array == null ? 0 : array.length;
+  return length ? array[length - 1] : undefined;
+}
+
+module.exports = last;
+
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports) {
+
+/**
+ * This method returns the first argument it receives.
+ *
+ * @static
+ * @since 0.1.0
+ * @memberOf _
+ * @category Util
+ * @param {*} value Any value.
+ * @returns {*} Returns `value`.
+ * @example
+ *
+ * var object = { 'a': 1 };
+ *
+ * console.log(_.identity(object) === object);
+ * // => true
+ */
+function identity(value) {
+  return value;
+}
+
+module.exports = identity;
+
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports) {
+
+/**
+ * This method returns the first argument it receives.
+ *
+ * @static
+ * @since 0.1.0
+ * @memberOf _
+ * @category Util
+ * @param {*} value Any value.
+ * @returns {*} Returns `value`.
+ * @example
+ *
+ * var object = { 'a': 1 };
+ *
+ * console.log(_.identity(object) === object);
+ * // => true
+ */
+function identity(value) {
+  return value;
+}
+
+module.exports = identity;
+
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports) {
+
+/** Used as references for various `Number` constants. */
+var MAX_SAFE_INTEGER = 9007199254740991;
+
+/** Used to detect unsigned integer values. */
+var reIsUint = /^(?:0|[1-9]\d*)$/;
+
+/**
+ * Checks if `value` is a valid array-like index.
+ *
+ * @private
+ * @param {*} value The value to check.
+ * @param {number} [length=MAX_SAFE_INTEGER] The upper bounds of a valid index.
+ * @returns {boolean} Returns `true` if `value` is a valid index, else `false`.
+ */
+function isIndex(value, length) {
+  length = length == null ? MAX_SAFE_INTEGER : length;
+  return !!length &&
+    (typeof value == 'number' || reIsUint.test(value)) &&
+    (value > -1 && value % 1 == 0 && value < length);
+}
+
+module.exports = isIndex;
+
+
+/***/ }),
+/* 12 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+/**
+ * fp.js
+ * author: hezhiqiang
+ * date: 2017-07-03
+ * desc: 一些函数式工具
+ */
+
+var after = exports.after = function after(originFn, afterFn) {
+  return function () {
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    var ret = originFn.apply(undefined, args);
+    afterFn.apply(undefined, args);
+    return ret;
+  };
+};
+
+var before = exports.before = function before(originFn, beforeFn) {
+  return function () {
+    for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+      args[_key2] = arguments[_key2];
+    }
+
+    beforeFn.apply(undefined, args);
+    return originFn.apply(undefined, args);
+  };
+};
+
+var currying = exports.currying = function currying(fn) {
+  var _args = [];
+  return function foo() {
+    var _this = this;
+
+    for (var _len3 = arguments.length, args = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+      args[_key3] = arguments[_key3];
+    }
+
+    if (args.length === 0) {
+      return after(function () {
+        return fn.apply(_this, _args);
+      }, function () {
+        return _args.splice(0, _args.length);
+      })();
+    } else {
+      [].push.apply(_args, args);
+      return foo;
+    }
+  };
+};
+
+var compose = exports.compose = function compose() {
+  for (var _len4 = arguments.length, funcs = Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
+    funcs[_key4] = arguments[_key4];
+  }
+
+  if (funcs.length === 0) {
+    return function (arg) {
+      return arg;
+    };
+  }
+
+  if (funcs.length === 1) {
+    return funcs[0];
+  }
+
+  return funcs.reduce(function (a, b) {
+    return function () {
+      return a(b.apply(undefined, arguments));
+    };
+  });
+};
+
+/***/ }),
+/* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.getType = getType;
+exports.default = validation;
+/**
+ * 数据验证类
+ * author: hezhiqiang
+ * date: 2017-07-03
+ * desc: 验证数据类型是否正确
+ */
+
+/**
+ * 获得参数的数据类型
+ *
+ * @export
+ * @param {any} target
+ * @returns {string} 目标数据的数据类型
+ */
+function getType(target) {
+  return Object.prototype.toString.call(target).slice(8, -1).toLowerCase();
+}
+
+/**
+ * 检验类型
+ *
+ * @export
+ * @param {any} target 目标数据
+ * @param {string | array} type 期望的类型 string: 期望的数据类型， array: 期望数据类型之一
+ */
+function validation(target, types) {
+  var expectTypes = getType(types);
+  if (expectTypes === 'string') {
+    if (getType(target) === types.toLowerCase()) return;
+    throw new Error('target type should be a ' + expectTypes);
+  } else if (expectTypes === 'array') {
+    if (types.some(function (type) {
+      return getType(target) === type;
+    })) return;
+    throw new Error('target type should be included in [' + types + ']');
+  }
+
+  throw new Error('validation parameter types should be string or array');
+}
+
+/***/ }),
+/* 14 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+/**
+ * native 注入代码包装
+ * window.WebViewJavascriptBridge = {
+     registerHandler, // 订阅一个 native 事件
+     callHandler, // 给 native 发布一个 带 handlerName 的事件
+     disableJavscriptAlertBoxSafetyTimeout, // 禁用 setTimeout 安全检查，增加桥接速度
+     _fetchQueue, // native 自用，用来获取 js 推送
+     _handleMessageFromObjC // native 自用，用来回调 js callback
+   }
+ */
+
+var ready = exports.ready = function ready(callback) {
+  if (window.WebViewJavascriptBridge) {
+    return callback(WebViewJavascriptBridge);
+  }
+  if (window.WVJBCallbacks) {
+    return window.WVJBCallbacks.push(callback);
+  }
+  window.WVJBCallbacks = [callback];
+  var WVJBIframe = document.createElement('iframe');
+  WVJBIframe.style.display = 'none';
+  WVJBIframe.src = 'https://__bridge_loaded__';
+  document.documentElement.appendChild(WVJBIframe);
+  setTimeout(function () {
+    return document.documentElement.removeChild(WVJBIframe);
+  }, 0);
+};
+
+exports.default = {
+  ready: ready
+};
+
+/***/ })
+/******/ ]);
+//# sourceMappingURL=YCWebViewBridge.js.map

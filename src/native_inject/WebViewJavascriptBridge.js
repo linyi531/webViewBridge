@@ -19,6 +19,7 @@
 	var messagingIframe;
 	var sendMessageQueue = [];
 	var messageHandlers = {};
+  window.messageHandlers = messageHandlers
 
 	var CUSTOM_PROTOCOL_SCHEME = 'https';
 	var QUEUE_HAS_MESSAGE = '__wvjb_queue_message__';
@@ -106,7 +107,7 @@
 
 	registerHandler("_disableJavascriptAlertBoxSafetyTimeout", disableJavscriptAlertBoxSafetyTimeout);
 
-	setTimeout(_callWVJBCallbacks, 0);
+	// setTimeout(_callWVJBCallbacks, 0);
 	function _callWVJBCallbacks() {
 		var callbacks = window.WVJBCallbacks;
 		delete window.WVJBCallbacks;

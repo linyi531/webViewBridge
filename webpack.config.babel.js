@@ -6,7 +6,7 @@ export default {
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'YCWebviewBridge.js'
+    filename: 'YCWebViewBridge.js'
   },
   module: {
     rules: [{
@@ -28,12 +28,12 @@ export default {
   target: 'web',
   plugins: [
     new LodashModuleReplacementPlugin(),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false,
-        drop_console: true
-      }
-    }),
+    // new webpack.optimize.UglifyJsPlugin({
+    //   compress: {
+    //     warnings: false,
+    //     drop_console: true
+    //   }
+    // }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"PROD"'
     })

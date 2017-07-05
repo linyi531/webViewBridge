@@ -1,17 +1,20 @@
 import YCEvent from './YCEvent'
 import Bridge from './bridge'
-import { compose } from './utils/fp'
 
 export default class YCWebViewBridge {
   constructor (namespance) {
     this.events = new YCEvent(namespance)
   }
 
+  ready (callback) {
+    Bridge.ready(callback)
+  }
+
   on (eventName, callback) {
     let self = this
-    compose(Bridge.ready, bridge => {
+    this.ready(bridge => {
       self.events.on(eventName, callback)
-      // registerHandler 会直接覆盖掉
+      // registerHandler 会直接覆盖掉, 不 care
       bridge.registerHandler(eventName, data => {
         self.events.emit(eventName, data)
       })
@@ -25,7 +28,7 @@ export default class YCWebViewBridge {
 
   once (eventName, callback) {
     let self = this
-    compose(Bridge.ready, bridge => {
+    this.ready(bridge => {
       self.events.once(eventName, callback)
       bridge.registerHandler(eventName, data => {
         self.events.emit(eventName, data)
@@ -38,7 +41,7 @@ export default class YCWebViewBridge {
   }
 
   callNative (eventName, data, callback) {
-    compose(Bridge.ready, bridge => {
+    this.ready(bridge => {
       bridge.callHandler(eventName, data, callback)
     })
   }
