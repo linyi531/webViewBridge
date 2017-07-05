@@ -1,5 +1,5 @@
 # YC-WebViewBridge
-该提供 Native 和 H5 项目的相互订阅功能
+为 Native 和 H5 项目提供双向订阅发布功能
 
 ## 注意
 编码风格使用 [standard](https://standardjs.com/readme-zhcn.html)，请对应 IDE 安装插件
