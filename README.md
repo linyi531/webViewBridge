@@ -89,8 +89,8 @@ var bridge = new YCWebViewBridge('namespance')
 - eventName: 事件名称
 - callback: 取消订阅的回调，如果不传递这个参数，则会取消掉所有的同类事件
 
-### callNative(eventName, data, callback: function(data))
-给 Native 发布一个事件
+### callNative(eventName, data, callback: function(data))
+向 native 发布一个事件
 - eventName: 事件名称
 - data: 发布事件所携带的数据
 - callback: 事件回调, data 为 native 回调的结果
