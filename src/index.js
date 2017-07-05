@@ -43,3 +43,5 @@ export default class YCWebViewBridge {
     })
   }
 }
+
+window.YCWebViewBridge = YCWebViewBridge

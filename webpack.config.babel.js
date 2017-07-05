@@ -6,7 +6,7 @@ export default {
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'ycwb.js'
+    filename: 'YCWebviewBridge.js'
   },
   module: {
     rules: [{
@@ -21,7 +21,9 @@ export default {
       loader: 'babel-loader'
     }]
   },
-  resolve: ['.js', '.json'],
+  resolve: {
+    extensions: ['.js', '.json']
+  },
   devtool: 'source-map',
   target: 'web',
   plugins: [
