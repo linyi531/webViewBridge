@@ -28,12 +28,12 @@ export default {
   target: 'web',
   plugins: [
     new LodashModuleReplacementPlugin(),
-    // new webpack.optimize.UglifyJsPlugin({
-    //   compress: {
-    //     warnings: false,
-    //     drop_console: true
-    //   }
-    // }),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false,
+        drop_console: true
+      }
+    }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"PROD"'
     })
