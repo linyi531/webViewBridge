@@ -2,6 +2,7 @@
 为 Native 和 H5 项目提供双向订阅发布功能
 
 ## 注意
+此项目无法单独在浏览器下运行，需要运行在 native 下的 webview 中
 编码风格使用 [standard](https://standardjs.com/readme-zhcn.html)，请对应 IDE 安装插件
 
 ## 使用
