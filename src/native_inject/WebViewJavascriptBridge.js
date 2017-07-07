@@ -107,7 +107,7 @@
 
 	registerHandler("_disableJavascriptAlertBoxSafetyTimeout", disableJavscriptAlertBoxSafetyTimeout);
 
-	// setTimeout(_callWVJBCallbacks, 0);
+	setTimeout(_callWVJBCallbacks, 0);
 	function _callWVJBCallbacks() {
 		var callbacks = window.WVJBCallbacks;
 		delete window.WVJBCallbacks;

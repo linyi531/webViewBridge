@@ -15,8 +15,8 @@ export default class YCWebViewBridge {
     this.ready(bridge => {
       self.events.on(eventName, callback)
       // registerHandler 会直接覆盖掉, 不 care
-      bridge.registerHandler(eventName, data => {
-        self.events.emit(eventName, data)
+      bridge.registerHandler(eventName, (data, responseCallback) => {
+        self.events.emit(eventName, data, responseCallback)
       })
     })
   }
@@ -30,8 +30,8 @@ export default class YCWebViewBridge {
     let self = this
     this.ready(bridge => {
       self.events.once(eventName, callback)
-      bridge.registerHandler(eventName, data => {
-        self.events.emit(eventName, data)
+      bridge.registerHandler(eventName, (data, responseCallback) => {
+        self.events.emit(eventName, data, responseCallback)
       })
     })
   }
