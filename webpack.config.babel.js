@@ -6,7 +6,8 @@ export default {
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname),
-    filename: 'index.js'
+    filename: 'index.js',
+    libraryTarget: 'commonjs'
   },
   module: {
     rules: [{
