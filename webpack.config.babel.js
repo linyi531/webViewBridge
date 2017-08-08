@@ -5,9 +5,8 @@ import LodashModuleReplacementPlugin from 'lodash-webpack-plugin'
 export default {
   entry: './src/index.js',
   output: {
-    path: path.resolve(__dirname),
-    filename: 'index.js',
-    libraryTarget: 'umd'
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'YCWebViewBridge.js'
   },
   module: {
     rules: [{
