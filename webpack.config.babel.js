@@ -7,7 +7,7 @@ export default {
   output: {
     path: path.resolve(__dirname),
     filename: 'index.js',
-    libraryTarget: 'commonjs'
+    libraryTarget: 'umd'
   },
   module: {
     rules: [{
