@@ -7,8 +7,8 @@
 
 ## 使用
 ```
-npm i https://github.com/guanghetv/YC-WebViewBridge
-import YCWebViewBridge from 'YCWebViewBridge'
+npm i yc-webviewbridge
+import YCWebViewBridge from 'yc-webviewbridge'
 ```
 或者
 ```
@@ -96,7 +96,7 @@ var bridge = new YCWebViewBridge('namespance')
 ### callNative(eventName, data, callback: function(data))
 向 native 发布一个事件
 - eventName: 事件名称
-- data: 发布事件所携带的参数
+- data: 发布事件所携带的参数, 没有参数时可以不传递
 - callback: 事件回调, data 为 native 回调的数据结果
 
 
