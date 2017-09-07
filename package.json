@@ -1,6 +1,6 @@
 {
   "name": "yc-webviewbridge",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Native 和 WebView 通信桥梁",
   "main": "lib/YCWebViewBridge.js",
   "scripts": {
