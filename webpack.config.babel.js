@@ -6,7 +6,8 @@ export default {
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'YCWebViewBridge.js'
+    filename: 'YCWebViewBridge.js',
+    libraryTarget: 'umd'
   },
   module: {
     rules: [{

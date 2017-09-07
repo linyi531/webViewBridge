@@ -41,10 +41,12 @@ export default class YCWebViewBridge {
   }
 
   callNative (eventName, data, callback) {
+    let callData = data
+    if (!data) {
+      callData = { ok: true, data: { message: 'nothing' } }
+    }
     this.ready(bridge => {
-      bridge.callHandler(eventName, data, callback)
+      bridge.callHandler(eventName, callData, callback)
     })
   }
 }
-
-window.YCWebViewBridge = YCWebViewBridge
