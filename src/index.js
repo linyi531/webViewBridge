@@ -1,5 +1,8 @@
 import YCEvent from './YCEvent'
 import Bridge from './bridge'
+import { getType } from './utils/validation'
+
+const noop = () => {}
 
 export default class YCWebViewBridge {
   constructor (namespance) {
@@ -40,13 +43,18 @@ export default class YCWebViewBridge {
     this.events.off(eventName, callback)
   }
 
-  callNative (eventName, data, callback) {
+  callNative (eventName, data, callback = () => {}) {
     let callData = data
-    if (!data) {
-      callData = { ok: true, data: { message: 'nothing' } }
+    let callHandler = callback
+    if (getType(data) === 'function') {
+      callData = { ok: true, data: { signal: 'noop' } }
+      callHandler = data
+    } else if (!data) {
+      callData = { ok: true, data: { signal: 'noop' } }
+      callHandler = noop
     }
     this.ready(bridge => {
-      bridge.callHandler(eventName, callData, callback)
+      bridge.callHandler(eventName, callData, callHandler)
     })
   }
 }
