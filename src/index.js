@@ -3,6 +3,7 @@ import Bridge from './bridge'
 import { getType } from './utils/validation'
 
 const noop = () => {}
+const noopData = { ok: true, data: { signal: 'noop' } }
 
 export default class YCWebViewBridge {
   constructor (namespance) {
@@ -12,7 +13,7 @@ export default class YCWebViewBridge {
   ready (callback) {
     Bridge.ready(callback)
   }
-
+ 
   on (eventName, callback) {
     let self = this
     this.ready(bridge => {
@@ -47,10 +48,10 @@ export default class YCWebViewBridge {
     let callData = data
     let callHandler = callback
     if (getType(data) === 'function') {
-      callData = { ok: true, data: { signal: 'noop' } }
+      callData = noopData
       callHandler = data
     } else if (!data) {
-      callData = { ok: true, data: { signal: 'noop' } }
+      callData = noopData
       callHandler = noop
     }
     this.ready(bridge => {
