@@ -20,6 +20,20 @@ export function getType (target) {
 }
 
 /**
+ * 是否是空字符串
+ * @param {string} str 待检测字符串
+ */
+export function isEmpty (str) {
+  if (getType(str) !== 'string') {
+    return false
+  }
+
+  return str
+    .replace(/^\s+/, '')
+    .replace(/\s+$/, '') === ''
+}
+
+/**
  * 检验类型
  *
  * @export

@@ -1,61 +1,22 @@
-import YCEvent from './YCEvent'
-import Bridge from './bridge'
-import { getType } from './utils/validation'
+import YCDefaultWebViewBridge from './defaultBridge'
+import YCAndroidWebViewBridge from './androidV2Bridge'
+import { getInterfaceObject } from './utils/android'
 
-const noop = () => {}
-const noopData = { ok: true, data: { signal: 'noop' } }
-
-export default class YCWebViewBridge {
-  constructor (namespance) {
-    this.events = new YCEvent(namespance)
-  }
-
-  ready (callback) {
-    Bridge.ready(callback)
-  }
- 
-  on (eventName, callback) {
-    let self = this
-    this.ready(bridge => {
-      self.events.on(eventName, callback)
-      // registerHandler 会直接覆盖掉, 不 care
-      bridge.registerHandler(eventName, (data, responseCallback) => {
-        self.events.emit(eventName, data, responseCallback)
-      })
-    })
-  }
-
-  one (eventName, callback) {
-    this.events.off(eventName)
-    this.on(eventName, callback)
-  }
-
-  once (eventName, callback) {
-    let self = this
-    this.ready(bridge => {
-      self.events.once(eventName, callback)
-      bridge.registerHandler(eventName, (data, responseCallback) => {
-        self.events.emit(eventName, data, responseCallback)
-      })
-    })
-  }
-
-  off (eventName, callback) {
-    this.events.off(eventName, callback)
-  }
-
-  callNative (eventName, data, callback = () => {}) {
-    let callData = data
-    let callHandler = callback
-    if (getType(data) === 'function') {
-      callData = noopData
-      callHandler = data
-    } else if (!data) {
-      callData = noopData
-      callHandler = noop
+/**
+ * 根据环境返回合适的 Bridge 对象
+ */
+function initBridge () {
+  let bridge = null
+  getInterfaceObject((err, interfaceObj) => {
+    if (err) {
+      bridge = YCDefaultWebViewBridge
+    } else {
+      bridge = YCAndroidWebViewBridge
     }
-    this.ready(bridge => {
-      bridge.callHandler(eventName, callData, callHandler)
-    })
-  }
+  })
+  return bridge
 }
+
+const YCWebViewBridge = initBridge()
+
+export default YCWebViewBridge

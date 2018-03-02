@@ -2,11 +2,11 @@
   "name": "yc-webviewbridge",
   "version": "0.2.1",
   "description": "Native 和 WebView 通信桥梁",
-  "main": "lib/YCWebViewBridge.js",
+  "main": "dist/YCWebViewBridge.js",
   "scripts": {
     "test": "mocha --recursive --compilers js:babel-core/register",
     "dev": "mocha --recursive --watch --compilers js:babel-core/register",
-    "build": "webpack --config webpack.config.babel.js && cp -R ./dist/*.js ./lib/"
+    "build": "webpack --config webpack.config.babel.js && cp -R ./dist/*.js ./test/html/"
   },
   "author": "hezhiqiang",
   "license": "MIT",
@@ -17,7 +17,9 @@
       "test/",
       "lib/"
     ],
-    "globals": ["WebViewJavascriptBridge"],
+    "globals": [
+      "WebViewJavascriptBridge"
+    ],
     "parser": "babel-eslint"
   },
   "devDependencies": {
@@ -30,9 +32,10 @@
     "lodash-webpack-plugin": "^0.11.4",
     "mocha": "^3.4.2",
     "standard": "^10.0.2",
-    "webpack": "^3.0.0"
+    "webpack": "^3.11.0"
   },
   "dependencies": {
+    "js-base64": "^2.4.3",
     "lodash": "^4.17.4"
   }
 }

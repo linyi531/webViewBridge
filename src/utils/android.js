@@ -1,12 +1,12 @@
+import { Base64 } from 'js-base64'
+import { getType, isEmpty } from './validation'
+
 export const ANDROID_JAVASCRIPT_INTERFACE_OBJECT_NAME = 'YCJSBridge'
 export const CALL_NATIVE_KEY = 'evaluateJava'
 
 export function getInterfaceObject (callback) {
-  const interfaceObject = window[ANDROID_JAVASCRIPT_INTERFACE_OBJECT_NAME]
-  const isExist = Object
-    .prototype
-    .toString
-    .call(interfaceObject) === '[object Object]'
+  const interfaceObject = window.YCJSBridge // 使用 [] 获取 bridge 引用方式会报异常
+  const isExist = getType(interfaceObject) === 'object'
   if (isExist) {
     callback(null, interfaceObject)
   } else {
@@ -14,12 +14,40 @@ export function getInterfaceObject (callback) {
   }
 }
 
-
 export function getBridgeParameter (eventName, params, dispatchId = 'NOOP') {
-  return JSON.stringify({
+  if (isEmpty(eventName)) {
+    console.error('eventName must be a string and not empty')
+    return
+  }
+  let data = {}
+  if (getType(params) === 'object') data = params
+  return {
     eventName,
-    params,
+    params: data,
     dispatchId
-  })
+  }
 }
 
+export function decodeData (base64Str) {
+  if (getType(base64Str) === 'string' && !isEmpty(base64Str)) {
+    const jsonStr = Base64.decode(base64Str)
+    const json = JSON.parse(jsonStr)
+    return json
+  } else {
+    const err = 'decodeData is not a string'
+    console.error(err)
+    return { err }
+  }
+}
+
+export function encodeData (jsonObj) {
+  if (getType(jsonObj) === 'object' && !isEmpty(jsonObj)) {
+    const jsonStr = JSON.stringify(jsonObj)
+    const base64Str = Base64.encode(jsonStr)
+    return base64Str
+  } else {
+    const err = 'encodeData is not a json object'
+    console.error(err)
+    return err
+  }
+}

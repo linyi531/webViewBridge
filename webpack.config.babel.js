@@ -7,7 +7,9 @@ export default {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'YCWebViewBridge.js',
-    libraryTarget: 'umd'
+    libraryTarget: 'umd',
+    libraryExport: 'default',
+    library: 'YCWebViewBridge'
   },
   module: {
     rules: [{

@@ -110,14 +110,16 @@ export default class YCEvent {
    *
    * @param {string} eventName 事件名称
    * @param {function} data 事件携带的数据
+   * @returns {number} effectCount 执行回调的个数
    * @memberof YCEvent
    */
   emit (eventName, ...data) {
-    if (getType(eventName) !== 'string') return
-    if (getType(this.cache[eventName]) !== 'array') return
-
-    this.cache[eventName].forEach(item => {
+    if (getType(eventName) !== 'string') return 0
+    if (getType(this.cache[eventName]) !== 'array') return 0
+    const funcs = this.cache[eventName]
+    funcs.forEach(item => {
       item.apply(this, data)
     })
+    return funcs.length
   }
 }

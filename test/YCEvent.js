@@ -5,6 +5,7 @@ describe('YCEvent', () => {
   describe('#nameSpance', () => {
     it('create and get', () => {
       let foo = new YCEvent('foo')
+      console.log(foo.__YCBridge__)
       let cache = YCEvent.getCache('foo')
       assert.equal(true, !!cache)
     })
