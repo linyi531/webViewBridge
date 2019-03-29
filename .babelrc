@@ -1,4 +1,11 @@
 {
-  "presets": ["es2015"],
-  "plugins": ["lodash"]
+  "presets": [
+    "@babel/env",
+    "@babel/typescript"
+  ],
+  
+  "plugins": [
+    "lodash",
+    "@babel/proposal-object-rest-spread"
+  ]
 }

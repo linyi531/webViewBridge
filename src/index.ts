@@ -1,22 +1,22 @@
-import YCDefaultWebViewBridge from "./defaultBridge";
-import YCAndroidWebViewBridge from "./androidV2Bridge";
-import { getInterfaceObject } from "./utils/android";
+import YCAndroidWebViewBridge from './androidV2Bridge'
+import YCDefaultWebViewBridge from './defaultBridge'
+import { getInterfaceObject } from './utils/android'
 
 /**
  * 根据环境返回合适的 Bridge 对象
  */
 function initBridge(): IBridge | IAndroidBridge {
-  let bridge;
+  let bridge
   getInterfaceObject((err, interfaceObj) => {
     if (err) {
-      bridge = YCDefaultWebViewBridge;
+      bridge = YCDefaultWebViewBridge
     } else {
-      bridge = YCAndroidWebViewBridge;
+      bridge = YCAndroidWebViewBridge
     }
-  });
-  return bridge;
+  })
+  return bridge
 }
 
-const YCWebViewBridge = initBridge();
+const YCWebViewBridge = initBridge()
 
-export default YCWebViewBridge;
+export default YCWebViewBridge

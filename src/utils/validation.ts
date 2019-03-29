@@ -16,7 +16,7 @@ export function getType(target: any) {
   return Object.prototype.toString
     .call(target)
     .slice(8, -1)
-    .toLowerCase();
+    .toLowerCase()
 }
 
 /**
@@ -24,11 +24,11 @@ export function getType(target: any) {
  * @param {string} str 待检测字符串
  */
 export function isEmpty(str: string): boolean | string {
-  if (getType(str) !== "string") {
-    return false;
+  if (getType(str) !== 'string') {
+    return false
   }
 
-  return str.replace(/^\s+/, "").replace(/\s+$/, "") === "";
+  return str.replace(/^\s+/, '').replace(/\s+$/, '') === ''
 }
 
 /**
@@ -39,14 +39,18 @@ export function isEmpty(str: string): boolean | string {
  * @param {string | array} type 期望的类型 string: 期望的数据类型， array: 期望数据类型之一
  */
 export default function validation(target, types) {
-  let expectTypes = getType(types);
-  if (expectTypes === "string") {
-    if (getType(target) === types.toLowerCase()) return;
-    throw new Error(`target type should be a ${expectTypes}`);
-  } else if (expectTypes === "array") {
-    if (types.some(type => getType(target) === type)) return;
-    throw new Error(`target type should be included in [${types}]`);
+  const expectTypes = getType(types)
+  if (expectTypes === 'string') {
+    if (getType(target) === types.toLowerCase()) {
+      return
+    }
+    throw new Error(`target type should be a ${expectTypes}`)
+  } else if (expectTypes === 'array') {
+    if (types.some(type => getType(target) === type)) {
+      return
+    }
+    throw new Error(`target type should be included in [${types}]`)
   }
 
-  throw new Error("validation parameter types should be string or array");
+  throw new Error('validation parameter types should be string or array')
 }

@@ -5,31 +5,30 @@
  * desc: 支持命名空间的 PUB/SUB Class
  */
 
-import _ from "lodash";
-import { after } from "./utils/fp";
-import validation, { getType } from "./utils/validation";
+import _ from 'lodash'
+import { after } from './utils/fp'
+import validation, { getType } from './utils/validation'
 
-const DEFAULT_SPANCE_NAME = "_global_";
-let _namespanceCache = {};
+const DEFAULT_SPANCE_NAME = '_global_'
+const _namespanceCache = {}
 
 export default class YCEvent implements IEvent {
-  spaceName: string;
+  static getCache(spanceName: string) {
+    return _namespanceCache[spanceName]
+  }
+  spaceName: string
   cache: {
-    [key: string]: Function[] | null;
-  };
+    [key: string]: Function[] | null
+  }
   /**
    * 创建一个 YCEvent 对象.
    * @param {string} spaceName 命名空间名字，默认为 _global_
    * @memberof YCEvent
    */
   constructor(spaceName: string) {
-    validation(spaceName, ["string", "undefined"]);
-    this.spaceName = spaceName || DEFAULT_SPANCE_NAME;
-    this.cache = this._getCache();
-  }
-
-  static getCache(spanceName: string) {
-    return _namespanceCache[spanceName];
+    validation(spaceName, ['string', 'undefined'])
+    this.spaceName = spaceName || DEFAULT_SPANCE_NAME
+    this.cache = this._getCache()
   }
 
   /**
@@ -39,12 +38,12 @@ export default class YCEvent implements IEvent {
    * @memberof YCEvent
    */
   _getCache() {
-    let cache = _namespanceCache[this.spaceName];
+    let cache = _namespanceCache[this.spaceName]
     if (!cache) {
-      cache = _namespanceCache[this.spaceName] = {};
+      cache = _namespanceCache[this.spaceName] = {}
     }
 
-    return cache;
+    return cache
   }
 
   /**
@@ -55,14 +54,14 @@ export default class YCEvent implements IEvent {
    * @memberof YCEvent
    */
   on(eventName: string, callback: Function) {
-    let funArray = this.cache[eventName];
+    let funArray = this.cache[eventName]
     if (funArray instanceof Array) {
-      funArray.push(callback);
+      funArray.push(callback)
     } else {
-      funArray = [];
-      funArray.push(callback);
+      funArray = []
+      funArray.push(callback)
     }
-    this.cache[eventName] = funArray;
+    this.cache[eventName] = funArray
     // if (getType(this.cache[eventName]) !== "array") {
     //   this.cache[eventName] = [];
     // }
@@ -77,11 +76,14 @@ export default class YCEvent implements IEvent {
    * @memberof YCEvent
    */
   once(eventName: string, callback: Function) {
-    if (getType(eventName) !== "string") return;
-    if (getType(callback) !== "function") return;
-    let self = this;
-    let newCallback = after(callback, () => self.off(eventName, newCallback));
-    this.on(eventName, newCallback);
+    if (getType(eventName) !== 'string') {
+      return
+    }
+    if (getType(callback) !== 'function') {
+      return
+    }
+    const newCallback = after(callback, () => this.off(eventName, newCallback))
+    this.on(eventName, newCallback)
   }
 
   /**
@@ -92,10 +94,14 @@ export default class YCEvent implements IEvent {
    * @memberof YCEvent
    */
   one(eventName: string, callback: Function) {
-    if (getType(eventName) !== "string") return;
-    if (getType(callback) !== "function") return;
-    this.off(eventName);
-    this.on(eventName, callback);
+    if (getType(eventName) !== 'string') {
+      return
+    }
+    if (getType(callback) !== 'function') {
+      return
+    }
+    this.off(eventName)
+    this.on(eventName, callback)
   }
 
   /**
@@ -106,11 +112,13 @@ export default class YCEvent implements IEvent {
    * @memberof YCEvent
    */
   off(eventName: string, callback?: Function | null) {
-    if (getType(eventName) !== "string") return;
-    if (getType(callback) === "function") {
-      _.remove(this.cache[eventName], item => item === callback);
+    if (getType(eventName) !== 'string') {
+      return
+    }
+    if (getType(callback) === 'function') {
+      _.remove(this.cache[eventName], item => item === callback)
     } else {
-      this.cache[eventName] = null;
+      this.cache[eventName] = null
       // this.cache[eventName] = [];
     }
   }
@@ -124,16 +132,18 @@ export default class YCEvent implements IEvent {
    * @memberof YCEvent
    */
   emit(eventName: string, ...data: any[]) {
-    if (getType(eventName) !== "string") return 0;
+    if (getType(eventName) !== 'string') {
+      return 0
+    }
     // if (getType(this.cache[eventName]) !== "array") return 0;
-    const funcs = this.cache[eventName];
+    const funcs = this.cache[eventName]
     if (funcs instanceof Array) {
       funcs.forEach(item => {
-        item.apply(this, data);
-      });
-      return funcs.length;
+        item.apply(this, data)
+      })
+      return funcs.length
     } else {
-      return 0;
+      return 0
     }
   }
 }
