@@ -1,5 +1,7 @@
 import assert from 'assert'
 import validation from '../src/utils/validation'
+// const assert = require('assert')
+// const validation = require('../src/utils/validation')
 
 const Q = () => true
 

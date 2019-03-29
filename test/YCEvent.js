@@ -1,5 +1,7 @@
-import assert from 'assert'
+import * as assert from 'assert'
 import YCEvent from '../src/YCEvent'
+// const assert = require('assert')
+// const YCEvent = require('../src/YCEvent')
 
 describe('YCEvent', () => {
   describe('#nameSpance', () => {
