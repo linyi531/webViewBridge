@@ -4,7 +4,7 @@
   "description": "Native 和 WebView 通信桥梁",
   "main": "dist/YCWebViewBridge.js",
   "scripts": {
-    "test": "mocha -r ts-node/register",
+    "test": "mocha -r ts-node/register test/*.ts",
     "dev": "mocha --recursive --watch --compilers ts-node / register",
     "build": "webpack --config webpack.config.js && cp -R ./dist/*.js ./test/html/"
   },
