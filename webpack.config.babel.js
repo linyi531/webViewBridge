@@ -3,7 +3,8 @@ import webpack from 'webpack'
 import LodashModuleReplacementPlugin from 'lodash-webpack-plugin'
 
 export default {
-  entry: './src/index.js',
+  mode: 'production',
+  entry: './src/index.ts',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'YCWebViewBridge.js',
@@ -13,7 +14,7 @@ export default {
   },
   module: {
     rules: [{
-      test: /\.js$/,
+      test: /\.tsx?$/,
       include: [
         path.resolve(__dirname, 'src')
       ],
@@ -21,22 +22,19 @@ export default {
         path.resolve(__dirname, 'src/native_inject'),
         path.resolve(__dirname, 'node_modules')
       ],
-      loader: 'babel-loader'
+      loader: 'ts-loader'
     }]
   },
   resolve: {
-    extensions: ['.js', '.json']
+    extensions: ['.js', '.json', '.ts', '.tsx']
   },
   devtool: 'source-map',
   target: 'web',
+  optimization: {
+    minimize: true
+  },
   plugins: [
     new LodashModuleReplacementPlugin(),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false,
-        drop_console: true
-      }
-    }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"PROD"'
     })
